@@ -90,6 +90,7 @@ export default {
           : await register({
               user: this.user,
             });
+            console.log(data.user);
         // 存储数据至容器
         this.$store.commit("setUser", data.user);
         Cookie.set("user", JSON.stringify(data.user));

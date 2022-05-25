@@ -51,3 +51,37 @@ export const getComments = slug => {
     url: `/api/articles/${slug}/comments`
   })
 }
+
+// 发表文章
+export const createArticle = data => {
+  return request({
+    method: 'POST',
+    url: '/api/articles',
+    data
+  })
+}
+
+// 删除文章
+export const deleteArticle = slug => {
+  return request({
+    method: 'DELETE',
+    url: `/api/articles/${slug}`,
+  })
+}
+
+// 发表文章评论
+export const createComment = (slug,data) => {
+  return request({
+    method: 'POST',
+    url: `/api/articles/${slug}/comments`,
+    data
+  })
+}
+
+// 删除评论
+export const deleteComment = (slug,id) => {
+  return request({
+    method: 'DELETE',
+    url: `/api/articles/${slug}/comments/${id}`
+  })
+}

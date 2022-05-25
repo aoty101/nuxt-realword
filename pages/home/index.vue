@@ -187,18 +187,19 @@ export default {
     const { tag } = query;
 
     const tab = query.tab || "gloable_feed";
-    const loadArticles =
-      store.state.user && tab === "your_feed" ? getFeedArticles : getArticles;
-
+    // const loadArticles = store.state.user && tab === "your_feed" ? getFeedArticles : getArticles;
+    const option = {
+      limit,
+      offset: (page - 1) * limit,
+      tag,
+    }
+    if(store.state.user && tab === "your_feed"){
+      option.favorited = store.state.user.username
+    }
     const [articleRes, tagRes] = await Promise.all([
-      loadArticles({
-        limit,
-        offset: (page - 1) * limit,
-        tag,
-      }),
+      getArticles(option),
       getTags(),
     ]);
-
     const { articles, articlesCount } = articleRes.data;
     const { tags } = tagRes.data;
 
